@@ -1,0 +1,69 @@
+//Get All
+GET http://localhost:3000/Products
+
+###
+//Get All Id's
+GET http://localhost:3000/Products/identifiers
+
+###
+//Get One By Id
+GET http://localhost:3000/Products/638c12f5f20f7baa621eb72f
+
+###
+//Get Field
+GET http://localhost:3000/Products/638c12f5f20f7baa621eb72f/name
+
+###
+//Get Image
+GET http://localhost:3000/Products/images/pelican-maxim-100nxt.webp
+
+###
+//Create
+Post http://localhost:3000/Products
+Content-Type: application/json
+
+{
+  "name": "Test Kayak",
+  "price": 29.99,
+  "colour": "Green",
+  "manufacturer": "Kayak People",
+  "startingDateAvailable": "nov 21 1991",
+  "endingDateAvailable": "july 18 2760",
+  "image": "awrwa.jpg",
+  "description": "Test API",
+  "seats": 6,
+  "weight": 1.4,
+  "length": 992
+}
+
+###
+//Replace
+PUT http://localhost:3000/Products/638c12f5f20f7baa621eb72f
+Content-Type: application/json
+
+{
+  "name": "Replaced Kayak",
+  "price": 2339.99,
+  "colour": "Blue",
+  "manufacturer": "Water Works",
+  "startingDateAvailable": "Dec 21 1991",
+  "endingDateAvailable": "Mar 18 2760",
+  "image": "image.jpg",
+  "description": "Testing PUT API",
+  "seats": 1,
+  "weight": 111.4,
+  "length": 32
+}
+
+###
+//Update Field
+PATCH http://localhost:3000/Products/638c12f5f20f7baa621eb72f/image
+Content-Type: application/json
+
+{
+  "image": "pelican-maxim-100nxt.webp"
+}
+
+###
+//Delete
+DELETE http://localhost:3000/Products/638c12f5f20f7baa621eb72f

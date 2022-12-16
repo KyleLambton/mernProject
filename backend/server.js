@@ -7,7 +7,9 @@ const mongoose = require('mongoose');
 app.use(express.json());
 
 const router = require('./routes/routes.js');
-app.use('/Products', router);
+const accountRouter = require('./routes/accountsRoutes.js');
+app.use('/Users', router);
+app.use('/Accounts', accountRouter);
 
 
 mongoose.connect(process.env.DATABASE_URL, () =>{
@@ -16,4 +18,9 @@ mongoose.connect(process.env.DATABASE_URL, () =>{
 const db = mongoose.connection;
 db.on('error', (err) => console.log(err))
 
-app.listen(3000, () => console.log('Server Started'));
+function getDB() {
+  return db;
+}
+
+module.exports = getDB;
+app.listen(4000, () => console.log('Server Started on Port 4000'));

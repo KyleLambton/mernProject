@@ -4,14 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "server.js",
     "dev": "nodemon server.js",
-    "InitDatabase": "node InitDatabase/Inserts.js"
+    "InitDb": "node InitDatabase/Inserts.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.5"
   },
   "devDependencies": {

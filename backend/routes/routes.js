@@ -1,34 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Product = require('../models/Kayaks.js');
-const path = require('path');
-
-//Get Image
-router.get('/images/:filename', (req, res) => {
-  var file = path.join(__dirname, '../../images', req.params.filename);
-
-  try {
-    res.sendFile(file);
-    //res.send({message: file})
-  } catch (err) {
-    res.status(500).json({message: err});
-  }
-});
+const UserSchema = require('../models/users.js');
 
 //Get All
 router.get('/', async (req, res) => {
   try {
-    const items = await Product.find();
-    res.json(items);
-  } catch (err) {
-    res.status(500).json({message: err.message});
-  }
-});
-
-//Get List of IDs
-router.get('/identifiers', async (req, res) => {
-  try {
-    const items = await Product.find().select({ id: 1});
+    const items = await UserSchema.find();
     res.json(items);
   } catch (err) {
     res.status(500).json({message: err.message});
@@ -36,103 +13,83 @@ router.get('/identifiers', async (req, res) => {
 });
 
 //Get One
-router.get('/:id', getProduct, (req, res) => {
+router.get('/:id', getUser, (req, res) => {
   try {
-    res.json(res.product);
+    res.json(res.user);
   } catch (err) {
     res.status(404).json({message: err.message})
   }
 });
 
-//Get Field
-router.get('/:id/:field', getProduct, (req, res) => {
-  const x = req.params.field;
-    const item = eval('res.product.' + x)
-    res.json(item);
-});
-
 //Create
 router.post('/', async (req, res) => {
-  const product = new Product({
-    name: req.body.name,
-    price: req.body.price,
-    colour: req.body.colour,
-    manufacturer: req.body.manufacturer,
-    startingDateAvailable: req.body.startingDateAvailable,
-    endingDateAvailable: req.body.endingDateAvailable,
-    image: req.body.image,
-    description: req.body.description,
-    seats: req.body.seats,
-    weight: req.body.weight,
-    length: req.body.length
+  const user = new UserSchema({
+    lastName: req.body.lastName,
+    firstName: req.body.firstName,
+    DoB: req.body.DoB,
+    address1: req.body.address1,
+    address2: req.body.address2,
+    city: req.body.city,
+    postalCode: req.body.postalCode,
+    country: req.body.country,
+    phone: req.body.phone,
+    email: req.body.email,
+    notes: req.body.notes
   });
 
   try {
-    const newProduct = await product.save();
-    res.status(201).json(newProduct);
+    const newUser = await user.save();
+    res.status(201).json(newUser);
   } catch (err) {
     res.status(400).json({message: err.message});
   }
 });
 
 //Put (Replace)
-router.put('/:id', getProduct, async (req, res) => {
-  res.product.name = req.body.name;
-  res.product.price = req.body.price;
-  res.product.colour = req.body.colour;
-  res.product.manufacturer = req.body.manufacturer;
-  res.product.startingDateAvailable = req.body.startingDateAvailable;
-  res.product.endingDateAvailable = req.body.endingDateAvailable;
-  res.product.image = req.body.image;
-  res.product.description = req.body.description;
-  res.product.seats = req.body.seats;
-  res.product.weight = req.body.weight;
-  res.product.length = req.body.length;
+router.put('/:id', getUser, async (req, res) => {
+  res.user.lastName = req.body.lastName;
+  res.user.firstName = req.body.firstName;
+  res.user.DoB = req.body.DoB;
+  res.user.address1 = req.body.address1;
+  res.user.address2 = req.body.address2;
+  res.user.city = req.body.city;
+  res.user.postalCode = req.body.postalCode;
+  res.user.country = req.body.country;
+  res.user.phone = req.body.phone;
+  res.user.email = req.body.email;
+  res.user.notes = req.body.notes;
 
   try {
-    const updatedProduct = await res.product.save();
-    res.json(updatedProduct);
-  } catch (err) {
-    res.status(400).json({message: err.message});
-  }
-});
-
-//Patch
-router.patch('/:id/:field', getProduct, async (req, res) => {
-  let x = req.params.field;
-  eval('res.product.'+ x + ' = req.body.'+ x);
-
-  try {
-    const updatedProduct = await res.product.save();
-    res.json(updatedProduct);
+    const updatedUser = await res.user.save();
+    res.json(updatedUser);
   } catch (err) {
     res.status(400).json({message: err.message});
   }
 });
 
 //Delete
-router.delete('/:id', getProduct, async (req, res) => {
+router.delete('/:id', getUser, async (req, res) => {
   try {
-    await res.product.remove();
+    await res.user.remove();
     res.json({ message: 'Deleted Item'});
   } catch (err) {
     res.status(500).json({message: err.message});
   }
 });
 
-//middleware GetProduct
-async function getProduct(req, res, next) {
-  let product
+//middleware GetUser
+async function getUser(req, res, next) {
+  let user
   try {
-    product = await Product.findById(req.params.id);
-    if (product == null) {
-      return res.status(404).json({ message: 'Cannot find product'});
+    user = await UserSchema.findById(req.params.id);
+    if (user == null) {
+      return res.status(404).json({ message: 'Cannot find user'});
     }
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 
-  res.product = product
+  res.user = user
   next();
 }
 

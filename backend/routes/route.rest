@@ -1,69 +1,48 @@
 //Get All
-GET http://localhost:3000/Products
-
-###
-//Get All Id's
-GET http://localhost:3000/Products/identifiers
+GET http://localhost:4000/Users/
 
 ###
 //Get One By Id
-GET http://localhost:3000/Products/638c12f5f20f7baa621eb72f
-
-###
-//Get Field
-GET http://localhost:3000/Products/638c12f5f20f7baa621eb72f/name
-
-###
-//Get Image
-GET http://localhost:3000/Products/images/pelican-maxim-100nxt.webp
+GET http://localhost:4000/Users/63923b852d9b7817eea27c93
 
 ###
 //Create
-Post http://localhost:3000/Products
+Post http://localhost:4000/Users/
 Content-Type: application/json
 
-{
-  "name": "Test Kayak",
-  "price": 29.99,
-  "colour": "Green",
-  "manufacturer": "Kayak People",
-  "startingDateAvailable": "nov 21 1991",
-  "endingDateAvailable": "july 18 2760",
-  "image": "awrwa.jpg",
-  "description": "Test API",
-  "seats": 6,
-  "weight": 1.4,
-  "length": 992
-}
+{ 
+  "lastName": "aTest", 
+  "firstName": "User", 
+  "DoB": "Nov 26 1972", 
+  "address1": "4990 River St", 
+  "address2": "N/A", 
+  "city": "Camlachie", 
+  "postalCode": "N0N 1E0", 
+  "country": "Canada", 
+  "phone": "549-876-4689", 
+  "email": "jbob@email.com", 
+  "notes": "Middle name Todd"
+  }
 
 ###
 //Replace
-PUT http://localhost:3000/Products/638c12f5f20f7baa621eb72f
+PUT http://localhost:4000/Users/63923b852d9b7817eea27c93
 Content-Type: application/json
 
-{
-  "name": "Replaced Kayak",
-  "price": 2339.99,
-  "colour": "Blue",
-  "manufacturer": "Water Works",
-  "startingDateAvailable": "Dec 21 1991",
-  "endingDateAvailable": "Mar 18 2760",
-  "image": "image.jpg",
-  "description": "Testing PUT API",
-  "seats": 1,
-  "weight": 111.4,
-  "length": 32
-}
-
-###
-//Update Field
-PATCH http://localhost:3000/Products/638c12f5f20f7baa621eb72f/image
-Content-Type: application/json
-
-{
-  "image": "pelican-maxim-100nxt.webp"
-}
+{ 
+  "lastName": "Update", 
+  "firstName": "Test", 
+  "DoB": "Nov 26 1972", 
+  "address1": "4990 River St", 
+  "address2": "N/A", 
+  "city": "Camlachie", 
+  "postalCode": "N0N 1E0", 
+  "country": "Canada", 
+  "phone": "549-876-4689", 
+  "email": "jbob@email.com", 
+  "notes": "Middle name Todd"
+  }
 
 ###
 //Delete
-DELETE http://localhost:3000/Products/638c12f5f20f7baa621eb72f
+DELETE http://localhost:4000/Users/63923b852d9b7817eea27c93

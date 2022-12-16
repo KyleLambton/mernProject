@@ -1,0 +1,57 @@
+//Check if userName Exsists
+POST http://localhost:4000/Accounts/userCheck
+Content-Type: application/json
+
+{
+  "userName": "admsin"
+}
+###
+
+//Check Token
+GET http://localhost:4000/Accounts/loggedin/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNjcxMDUyNjMzLCJleHAiOjE2NzEwNTI5MzN9.GfAUyzZogo1BK0axjR4-EXg2r_HmAO2VW_era-AtwKo
+
+
+###
+
+//Create 
+POST http://localhost:4000/Accounts/createAccount/
+Content-Type: application/json
+
+{
+  "userName": "admin",
+  "password": "test1234"
+}
+
+###
+
+//Login Request 
+POST http://localhost:4000/Accounts/login/
+Content-Type: application/json
+
+{
+  "userName": "admin",
+  "password": "test"
+}
+
+###
+
+//Refresh Token 
+POST http://localhost:4000/Accounts/token/
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InRlc3QyIiwiaWF0IjoxNjcwOTY0MDAyfQ.-CvSi3Ax3MGMD9_7tx0JFbuLkcizKQqROQkoEAQxocQ"
+}
+
+###
+
+//Delete Token 
+DELETE http://localhost:4000/Accounts/logout/
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InRlc3QyIiwiaWF0IjoxNjcwOTY0MDAyfQ.-CvSi3Ax3MGMD9_7tx0JFbuLkcizKQqROQkoEAQxocQ"
+}
+
+###

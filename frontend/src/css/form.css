@@ -1,0 +1,50 @@
+h1, p {
+  text-align: center;
+}
+
+form {
+  width: 45%; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.btn {
+  background-color: #008CBA;
+  border: 1px, solid, #008CBA;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+}
+.delBtn {
+  background-color: #f44336;
+  background-color: #f44336;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+}
+
+.btn:hover, .delBtn:hover {
+  background-color: white;
+  color: black;
+}
+
+.btnBox {
+  text-align: center;
+  margin: auto;
+}

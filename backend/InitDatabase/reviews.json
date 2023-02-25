@@ -1,0 +1,20 @@
+[
+  { 
+    "itemId": "63b7bf872265c23c985c0cf1",
+    "userName": "SomeUser",
+    "rating": 4,
+    "comment": "Item works well as intended."
+  },
+  { 
+    "itemId": "63b7bf872265c23c985c0cf1",
+    "userName": "Kayaker3939",
+    "rating": 5,
+    "comment": "Love this item, use it everyday"
+  },
+  { 
+    "itemId": "63b7bf872265c23c985c0cf1",
+    "userName": "AngryGuy",
+    "rating": 1,
+    "comment": "This thing sucks, it doesn't work"
+  }
+]

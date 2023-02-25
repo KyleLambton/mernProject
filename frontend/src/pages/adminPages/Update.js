@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate  } from "react-router-dom";
-import '../css/form.css';
+import '../../css/form.css';
+import Nav from "../../components/Nav.js";
 
 function Update() {
   // nav set for page change
@@ -106,6 +107,7 @@ function Update() {
   // JSX for form
   return (
     <>
+      <Nav />
       <h1>Edit User</h1>
 
       <br/>

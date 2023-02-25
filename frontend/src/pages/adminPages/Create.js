@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate  } from "react-router-dom";
-import '../css/form.css';
+import '../../css/form.css';
+import Nav from "../../components/Nav.js";
 
 function Create() {
   // nav set for page change
@@ -51,6 +52,7 @@ function Create() {
   // JSX for form
   return (
     <>
+      <Nav />
       <h1>Create Page</h1>
 
       <br/>

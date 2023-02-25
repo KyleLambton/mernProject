@@ -1,0 +1,19 @@
+.medLoader {
+  display: block;
+  margin: auto;
+  width: 5%;
+  height: 5%;
+}
+
+.accountPhoto {
+  width: 44%;
+  float: left;
+}
+.accPhoto {
+  width: 20%;
+  height: 20%;
+}
+.accountInfo {
+  width: 44%;
+  float: right;
+}

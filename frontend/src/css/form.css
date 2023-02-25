@@ -48,3 +48,8 @@ input[type=text], input[type=password] {
   text-align: center;
   margin: auto;
 }
+
+.error {
+  color: red;
+  text-align: center;
+}

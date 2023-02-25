@@ -4,35 +4,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Nav from './components/nav.js';
 import PrivateRoute from './helpers/LoginRD.js';
 
 //Pages
-import Login from './pages/Login.js';
-import CreateAccount from './pages/CreateAccount.js';
-import LogOut from './pages/Logout.js';
-import Create from './pages/Create.js';
-import Display from './pages/Display.js';
-import Update from './pages/Update.js';
+import Login from './pages/account/Login.js';
+import CreateAccount from './pages/account/CreateAccount.js';
+import MyAccount from './pages/account/MyAccount.js';
+import LogOut from './pages/account/Logout.js';
+import Cart from './pages/account/Cart.js';
+
+import Create from './pages/adminPages/Create.js';
+import Update from './pages/adminPages/Update.js';
+
+import Display from './pages/product/Display.js';
+import ViewProduct from './pages/product/ViewProduct.js';
 import NoPage from './pages/NoPage.js';
+
+//AdminPages
+import AdminLogin from './pages/adminPages/AdminLogin.js';
 
 //Render Routes
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path='/' element={<Nav />}>
           <Route index element={<PrivateRoute><Display /></PrivateRoute>} />
-          <Route path='create' element={<PrivateRoute><Create /></PrivateRoute>} />
-          <Route path=':id' element={<PrivateRoute><Update /></PrivateRoute>}>
-            <Route path=':id' element={<PrivateRoute><Update /></PrivateRoute>} />
-            <Route path='id' element={<PrivateRoute><Update /></PrivateRoute>} />
-          </Route>
-          <Route path='logOut' element={<LogOut />} />
+          <Route path='myAccount' element={<PrivateRoute><MyAccount /></PrivateRoute>} />
+          <Route path='product/id/:id' element={<PrivateRoute><ViewProduct /></PrivateRoute>} />
+          <Route path='cart' element={<Cart />} />
+          <Route path='logout' element={<LogOut />} />
           <Route path='login' element={<Login />} />
           <Route path='createaccount' element={<CreateAccount />} />
+          <Route path='admin'>
+            <Route path='login' element={<AdminLogin />} />
+          </Route>
           <Route path='*' element={<NoPage />} />
-      </Route>
     </Routes>
   </BrowserRouter>
 );

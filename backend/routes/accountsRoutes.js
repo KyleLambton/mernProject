@@ -2,31 +2,6 @@ const express = require('express');
 const router = express.Router();
 const accountSchema = require('../models/accounts.js');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
-
-accounts = [
-  {
-    "userName": "test",
-    "password": "$2b$10$bwFWVDRZw75fG.qmLMP3TecVIOuaN3Qw66p73SoPJKStcR30zcbpW"
-  },
-  {
-    "userName": "test2",
-    "password": "$2b$10$xObMY2RSdUkbpxGFfYRXcueiNX4GA1MGnJ.429zNtEQJaLnE6ERyK"
-  }
-];
-
-let rfTokens = [];
-
-// Get account with jwt
-router.get('/loggedin', authenticateToken, async (req, res) => {
-  //find user in db
-  const account = await accountSchema.find({ userName: req.account.userName });
-
-  console.log(account[0])
-  res.json(account[0]);
-});
-
 
 //Create account
 router.post('/createAccount', async (req, res) => {
@@ -36,7 +11,15 @@ router.post('/createAccount', async (req, res) => {
     const hashedPass = await bcrypt.hash(req.body.password, salt);
 
     //Save account to Db
-    const account = new accountSchema({ userName: req.body.userName,
+    const account = new accountSchema({ 
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      dob: req.body.dob,
+      email: req.body.email,
+      address: req.body.address,
+      city: req.body.city,
+      country: req.body.country,
+      userName: req.body.userName,
       password: hashedPass })
 
     const newAccount = await account.save();
@@ -59,17 +42,11 @@ router.post('/login', async (req, res) => {
   //check if password matches
   try {
     if (await bcrypt.compare(req.body.password, account[0].password)) {
+      //store session
+      req.session.accountID = account[0]._id;
+      req.session.name = account[0].userName;
 
-      // Create JWT
-      const userName = req.body.userName;
-      const sig = { userName: userName };
-
-      const accessToken = generateAccessToken(sig);
-      const refreshToken = jwt.sign(sig, process.env.REFRESH_TOKEN_SECRET);
-      rfTokens.push(refreshToken);
-
-
-      res.send({ userFound: true, auth: true, accessToken: accessToken, refreshToken: refreshToken});
+      res.send({ userFound: true, auth: true, sessionThing: req.session});
     } else {
       res.send({ userFound: true, auth: false});
     }
@@ -78,24 +55,56 @@ router.post('/login', async (req, res) => {
   }
 });
 
-//refreshToken
-router.post('/token', (req, res) => {
-  const refreshToken = req.body.token;
+//AdminLogin
+router.post('/adminlogin', async (req, res) => {
+  
+  //find user in db
+  const account = await accountSchema.find({ userName: req.body.userName });
+  
+  if (account[0] == undefined) {
+    return res.send({ userFound: false});
+  }
 
-  if (refreshToken == null) return res.sendStatus(401);
-  if (!rfTokens.includes(refreshToken)) return res.sendStatus(403);
+  //check if password matches
+  try {
+    if (await bcrypt.compare(req.body.password, account[0].password)) {
+      //store session
+      req.session.accountID = account[0]._id;
+      req.session.name = account[0].userName;
 
-  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, account) => {
-    if (err) return res.sendStatus(403);
-    const accessToken = generateAccessToken({ userName: account.userName});
-    res.json({ accessToken: accessToken});
-  });
+      if (account[0].role != 'Admin') {
+        return res.send({ isAdmin: false });
+      }
+
+      res.send({ userFound: true, auth: true });
+    } else {
+      res.send({ userFound: true, auth: false});
+    }
+  } catch {
+    res.status(500).send('Error with pass encryption');
+  }
 });
 
-//Delete rfToken
-router.delete('/logout', (req, res) => {
-  rfTokens = rfTokens.filter(t => t !== req.body.token);
-  res.sendStatus(204);
+//Get Role
+router.get('/getrole', async (req, res) => {
+  try {
+    let account = await accountSchema.find({ _id: req.session.accountID });
+
+    let role = account[0].role;
+
+    console.log(role);
+
+    res.send({ role: role });
+  } catch {
+    res.status(500).send('Error with getting Role');
+  }
+});
+
+//Log out
+router.get('/logout', async (req, res) => {
+  req.session = null;
+  
+  res.send();
 });
 
 //Check db to see if name exists
@@ -111,25 +120,40 @@ router.post('/userCheck', async (req, res) => {
   }
 });
 
-///////////////////// MiddleWare ////////////////////
+//Check Auth
+router.get('/auth', async (req, res) => {
+  const account = await accountSchema.find({ _id: req.session.accountID });
 
-//Get Account with Token 
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-  if (token == null) return res.sendStatus(401);
+  if (account[0]) {
+    res.json(account[0].userName);
+  } else {
+    res.status(404).send();
+  }
+});
 
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, account) => {
-    if (err) return res.sendStatus(403);
+//Get Account
+router.get('/getAccount', async (req, res) => {
+  const account = await accountSchema.find({ _id: req.session.accountID });
+  let x = account[0];
 
-    req.account = account;
-    next();
-  })
-}
+  if (account[0]) {
+    const view = {
+      userName: x.userName,
+      firstName: x.firstName,
+      lastName: x.lastName,
+      dob: x.dob,
+      email: x.email,
+      address: x.address,
+      city: x.city,
+      country: x.country,
+      role: x.role
+    }
 
-// Generate Token
-function generateAccessToken(sig) {
-  return jwt.sign(sig, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '5s' });
-}
+    console.log(view);
+    res.json(view);
+  } else {
+    res.status(404).send();
+  }
+});
 
 module.exports = router;

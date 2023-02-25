@@ -1,21 +1,21 @@
 import { useNavigate  } from "react-router-dom";
-import { useCookies } from 'react-cookie';
 import { useState } from 'react';
+import Nav from "../../components/Nav.js";
 
-function LoginPage() {
+function AdminLoginPage() {
   // nav set for page change
   const nav = useNavigate();
 
   // Vars for login
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [cookies, setCookies, removeCookies] = useCookies(['accessToken', 'refreshToken']);
+  const [error, setError] = useState(null);
 
   //Log in attempt
   const handleSubmit = async (e) => {
     e.preventDefault();
     const loginCreds = {userName, password};
-    const response = await fetch('/Accounts/login/', {
+    const response = await fetch('/Accounts/adminlogin/', {
       method: 'POST',
       body: JSON.stringify(loginCreds),
       headers: {
@@ -26,30 +26,29 @@ function LoginPage() {
 
     // Check if fetch is ok
     if (json.userFound == false) {
-      alert('Error: User does not exist');
+      setError('Error: User does not exist');
       return;
     }
     // Check if password matches db
     if (json.auth == false) {
-      alert('Error: Password incorrect');
+      setError('Error: Password incorrect');
+      return;
+    }
+    // Check if admin
+    if (json.isAdmin == false) {
+      setError('Error: Account is not an Admin');
       return;
     }
     // userName and password correct, create cookies/jwt
     if (json.auth == true) {
-      setCookies('accessToken', json.accessToken, { path: '/'});
-      setCookies('refreshToken', json.refreshToken, { path: '/'});
       nav('/');
     }
-  }
-
-  //goto new account page on link click
-  function gotoNewAccount() {
-    nav('/createAccount');
   }
 
   //JSX
   return (
     <>
+      <Nav />
       <h1>Login Page</h1>
       <br/>
       <form onSubmit={handleSubmit}>
@@ -68,13 +67,12 @@ function LoginPage() {
         />
 
         <div className="btnBox">
-          <input type="submit" id="submit" value="Submit Form" className="btn"></input>
-          <br/>
-          <a href="#" onClick={gotoNewAccount}>Create New Account</a>
+          <input type="submit" id="submit" value="Sign In" className="btn"></input>
+          <div className="error">{error}</div>
         </div>
       </form>
     </>
   )
 }
 
-export default LoginPage;
+export default AdminLoginPage;

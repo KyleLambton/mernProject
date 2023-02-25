@@ -1,48 +1,68 @@
 //Get All
-GET http://localhost:4000/Users/
+GET http://localhost:4000/Products/
 
 ###
 //Get One By Id
-GET http://localhost:4000/Users/63923b852d9b7817eea27c93
+GET http://localhost:4000/Products/id/63aa04f490f069537ce898f1
 
 ###
 //Create
-Post http://localhost:4000/Users/
+Post http://localhost:4000/Products/
 Content-Type: application/json
 
 { 
-  "lastName": "aTest", 
-  "firstName": "User", 
-  "DoB": "Nov 26 1972", 
-  "address1": "4990 River St", 
-  "address2": "N/A", 
-  "city": "Camlachie", 
-  "postalCode": "N0N 1E0", 
-  "country": "Canada", 
-  "phone": "549-876-4689", 
-  "email": "jbob@email.com", 
-  "notes": "Middle name Todd"
+  "name": "aTest", 
+  "price": 1998.35, 
+  "colour": "Purpnblue", 
+  "manufacturer": "hobosagdagagagad", 
+  "startingDateAvailable": "Nov 19 2015", 
+  "endingDateAvailable": "Dec 12 2036", 
+  "image": "outbound-inflatable-kayak-2-person.webp", 
+  "description": "Some floaty thingymabob", 
+  "seats": 1, 
+  "weight": 30, 
+  "length": 9.5
   }
 
 ###
 //Replace
-PUT http://localhost:4000/Users/63923b852d9b7817eea27c93
+PUT http://localhost:4000/Products/63aa04f490f069537ce898f1
 Content-Type: application/json
 
 { 
-  "lastName": "Update", 
-  "firstName": "Test", 
-  "DoB": "Nov 26 1972", 
-  "address1": "4990 River St", 
-  "address2": "N/A", 
-  "city": "Camlachie", 
-  "postalCode": "N0N 1E0", 
-  "country": "Canada", 
-  "phone": "549-876-4689", 
-  "email": "jbob@email.com", 
-  "notes": "Middle name Todd"
+  "name": "Updated", 
+  "price": 1998.35, 
+  "colour": "Purpnblue", 
+  "manufacturer": "hobos", 
+  "startingDateAvailable": "Nov 19 2015", 
+  "endingDateAvailable": "Dec 12 2036", 
+  "image": "outbound-inflatable-kayak-2-person.webp", 
+  "description": "Some floaty thingymabob", 
+  "seats": 1, 
+  "weight": 30, 
+  "length": 9.5
   }
 
 ###
 //Delete
-DELETE http://localhost:4000/Users/63923b852d9b7817eea27c93
+DELETE http://localhost:4000/Products/63ae066dfe4f62cf864ec70e
+
+###
+//Image
+GET http://localhost:4000/Products/image/pelican-maxim-100nxt.webp
+
+###
+//GetReviews
+GET http://localhost:4000/Products/getreviews/63b7bf872265c23c985c0cf1
+
+###
+//CreateReview
+Post http://localhost:4000/Products/addreview
+Content-Type: application/json
+
+{ 
+  "itemId": "63b7bf872265c23c985c0cf2",
+  "userName": "SomeUser13513",
+  "rating": 4,
+  "comment": "Some random comment about the product. Maybe they liked it, maybe they didn't. Turns out they recommended it to their family and all of their family bought one as well. Now they all go out on Tuesdays and go down the river. Uncle Richard hit a rock and flipped his kayak but he was alright, hes now considering buying a wider, more stable kayak for future use."
+  }

@@ -1,0 +1,221 @@
+.product {
+  width: 90%;
+  height: 500px;
+  margin: auto;
+  padding: 2%;
+}
+
+/* Main Divs */
+.productImageDiv {
+  width: 68%;
+  height: 450px;
+  float: left;
+  background: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.productInfoDiv {
+  width: 28%;
+  height: 450px;
+  float: right;
+  background: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Image Div */
+.productImage {
+  display: block;
+  max-width: 90%;
+  height: 80%;
+  object-fit: contain;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  background: white;
+}
+
+.productGallary {
+  clear: both;
+  width: 90%;
+  height: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Info Div */
+.description {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.description p {
+  text-align: left;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.addCartButton {
+  position: relative;
+  bottom: -115px;
+  left: 5%;
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 90%;
+  font-size: 18px;
+}
+
+/* Add Review Button */
+.addReviewButton {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.addCartButton:hover, .addReviewButton:hover {
+  opacity: 0.7;
+}
+
+.clear {
+  clear: both;
+}
+
+/* Review Div Stuff */
+.reviewsDiv {
+  float: left;
+  width: 68%;
+  height: 454px;
+  padding: 10px;
+  overflow: scroll;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.extendedInfo {
+  float: right;
+  width: 28%;
+  height: 454px;
+  overflow: scroll;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.reviewCard {
+  width: 90%;
+  height: 200px;
+  margin: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.reviewHeader {
+  width: 15%;
+  text-align: left;
+  margin-left: 5%;
+  float: left;
+}
+
+.reviewHeader p, .reviewBody p {
+  text-align: left;
+}
+
+.reviewBody {
+  width: 75%;
+  float: right;
+}
+
+li {
+  list-style-type: none;
+}
+
+.centerDiv {
+  width: fit-content;
+  margin: auto;
+}
+
+.center {
+  text-align: center;
+}
+
+/* floating form Stuff */
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f1f1f1;
+  border: 2px solid #555555;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  z-index: 9;
+  width: 400px;
+}
+
+/* Add styles to the form container */
+.form-container {
+  width: 95%;
+  padding: 10px;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}

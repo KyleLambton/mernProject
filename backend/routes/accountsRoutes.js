@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 const accountSchema = require('../models/accounts.js');
 const bcrypt = require('bcrypt');
+const path = require('path');
+const ObjectID = require('mongodb').ObjectID;
+
+//const multer = require('multer');
+//const GridFS = require('multer-gridfs-storage');
 
 //Create account
 router.post('/createAccount', async (req, res) => {
@@ -14,13 +19,14 @@ router.post('/createAccount', async (req, res) => {
     const account = new accountSchema({ 
       firstName: req.body.firstName,
       lastName: req.body.lastName,
+      userImage: "userImage.png",
       dob: req.body.dob,
       email: req.body.email,
       address: req.body.address,
       city: req.body.city,
       country: req.body.country,
       userName: req.body.userName,
-      password: hashedPass })
+      password: hashedPass });
 
     const newAccount = await account.save();
     res.status(201).json(newAccount);
@@ -138,9 +144,11 @@ router.get('/getAccount', async (req, res) => {
 
   if (account[0]) {
     const view = {
+      id: x._id,
       userName: x.userName,
       firstName: x.firstName,
       lastName: x.lastName,
+      userImage: x.userImage,
       dob: x.dob,
       email: x.email,
       address: x.address,
@@ -153,6 +161,25 @@ router.get('/getAccount', async (req, res) => {
     res.json(view);
   } else {
     res.status(404).send();
+  }
+});
+
+//Get Account Photo by ID
+router.get('/getUserImage/:id', async (req, res) => {
+  if (ObjectID.isValid(req.params.id)) {
+    const account = await accountSchema.find({ _id: req.params.id }, {userImage: 1});
+    let x = account[0];
+
+    console.log(x);
+    if (account[0]) {
+      let file = path.join(__dirname, '../images/acc', x.userImage);
+
+      res.sendFile(file);
+    } else {
+      res.status(404).send();
+    }
+  } else {
+    res.send({ message: "Not a valid ID" });
   }
 });
 

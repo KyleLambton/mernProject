@@ -9,6 +9,10 @@ const accountsSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  userImage: {
+    type: String,
+    required: true
+  },
   dob: {
     type: String,
     required: true

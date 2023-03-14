@@ -27,12 +27,12 @@ function MyAccount() {
   return (
     <>
       <Nav />
-      {loaded && <>
+      {loaded ? (<>
         <h1>Welcome Back {account.firstName}!</h1>
         <br/>
         <div className="account">
           <div className="accountPhoto">
-            <img src={loader} className="accPhoto" />
+            <img src={"/Accounts/getUserImage/" + account.id} className="accPhoto" />
           </div>
           <div className="accountInfo">
             <p>Name: {account.firstName}, {account.lastName}</p>
@@ -44,8 +44,7 @@ function MyAccount() {
             <p>Country: {account.country}</p>
           </div>
         </div>
-      </>}
-      {!loaded && <><br/><img src={loader} className="medLoader"/></>}
+      </>) : (<img src={loader} className="medLoader"/>)}
     </>
   )
 }

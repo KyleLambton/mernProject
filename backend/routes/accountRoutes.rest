@@ -67,3 +67,6 @@ Content-Type: application/json
 }
 
 ###
+
+//Get User Image
+GET http://localhost:4000/Accounts/getUserImage/640ffda8aecbb534454886d6

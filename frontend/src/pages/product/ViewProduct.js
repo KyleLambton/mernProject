@@ -2,9 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import '../../css/productView.css';
 import Nav from "../../components/Nav.js";
+import Cookies from 'js-cookie';
 
 function addToCart (e) {
-  alert('added to cart');
+  let cart = JSON.parse(Cookies.get('cart'));
+
+  //Check if item exists
+  let found = false;
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i][0] == e) {
+      cart[i][1] += 1;
+      found = true;
+    }
+  }
+  if (found == false) cart.push([e, 1]);
+
+  console.log(cart);
+  Cookies.set('cart', JSON.stringify( cart ));
 }
 
 function addReviewForm(e) {
@@ -112,7 +126,7 @@ function Display() {
                 </p>
                 <p className="price">Price: ${productData.price}</p>
               </div>
-              <button onClick={(e) => addToCart(e)} type="button" className="addCartButton">Add To Cart</button>
+              <button onClick={(e) => addToCart(productData._id)} type="button" className="addCartButton">Add To Cart</button>
             </div>
 
             <div className="clear"></div> <br/> <br/>

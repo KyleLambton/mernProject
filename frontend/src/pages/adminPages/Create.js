@@ -8,17 +8,15 @@ function Create() {
   const nav = useNavigate();
 
   // Storing params in useStats
-  const [lastName, setLastName] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [DoB, setDoB] = useState('');
-  const [address1, setAddress1] = useState('');
-  const [address2, setAddress2] = useState('');
-  const [city, setCity] = useState('');
-  const [postalCode, setPostalCode] = useState('');
-  const [country, setCountry] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [notes, setNotes] = useState('');
+  const [name, setName] = useState(null);
+  const [brand, setBrand] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [sku, setSku] = useState(null);
+  const [rating, setRating] = useState(null);
+  const [stock, setStock] = useState(null);
+  const [image, setImage] = useState(null);
+  const [features, setFeatures] = useState([]);
+  const [specifications, setSpecifications] = useState([]);
 
   //error state for fetch response
   const [error, setError] = useState(null);
@@ -26,7 +24,7 @@ function Create() {
   // onSubmit function to send to api
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newUser = {lastName, firstName, DoB, address1, address2, city, postalCode, country, phone, email, notes};
+    const newUser = {name, brand, price, sku, rating, stock, image, features, specifications};
   
     const response = await fetch('/Users/', {
       method: 'POST',
@@ -59,82 +57,53 @@ function Create() {
 
       {error && <div className="error">{error}</div>}
       <form onSubmit={handleSubmit}>
-        <label>Last Name:</label>
+        <label>Name:</label>
         <input 
           type="text"
-          onChange={(e) => setLastName(e.target.value)}
-          value={lastName}
+          onChange={(e) => setName(e.target.value)}
+          value={name}
         />
 
-        <label>First Name:</label>
+        <label>Brand:</label>
         <input 
           type="text"
-          onChange={(e) => setFirstName(e.target.value)}
-          value={firstName}
+          onChange={(e) => setBrand(e.target.value)}
+          value={brand}
         />
 
-        <label>Date of Birth:</label>
+        <label>Price:</label>
         <input 
           type="text"
-          onChange={(e) => setDoB(e.target.value)}
-          value={DoB}
+          onChange={(e) => setPrice(e.target.value)}
+          value={price}
         />
 
-        <label>Address 1:</label>
+        <label>SKU#:</label>
         <input 
           type="text"
-          onChange={(e) => setAddress1(e.target.value)}
-          value={address1}
+          onChange={(e) => setSku(e.target.value)}
+          value={sku}
         />
 
-        <label>Address 2:</label>
+        <label>Stock:</label>
         <input 
           type="text"
-          onChange={(e) => setAddress2(e.target.value)}
-          value={address2}
+          onChange={(e) => setStock(e.target.value)}
+          value={stock}
         />
 
-        <label>City:</label>
+        <label>Image:</label>
         <input 
           type="text"
-          onChange={(e) => setCity(e.target.value)}
-          value={city}
+          onChange={(e) => setImage(e.target.value)}
+          value={image}
         />
 
-        <label>Postal Code:</label>
-        <input 
-          type="text"
-          onChange={(e) => setPostalCode(e.target.value)}
-          value={postalCode}
-        />
+        <label>Features:</label>
+        <input type="button" >Add Feature</input>
 
-        <label>Country:</label>
-        <input 
-          type="text"
-          onChange={(e) => setCountry(e.target.value)}
-          value={country}
-        />
-
-        <label>Phone:</label>
-        <input 
-          type="text"
-          onChange={(e) => setPhone(e.target.value)}
-          value={phone}
-        />
-
-        <label>Email:</label>
-        <input 
-          type="text"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-        />
-
-        <label>Notes:</label>
-        <input 
-          type="text"
-          onChange={(e) => setNotes(e.target.value)}
-          value={notes}
-        />
+        <label>Specifications:</label>
+        <input type="button">Add Feature</input>
 
         <br/>
 

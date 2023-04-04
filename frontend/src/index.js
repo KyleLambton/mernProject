@@ -13,7 +13,7 @@ import MyAccount from './pages/account/MyAccount.js';
 import LogOut from './pages/account/Logout.js';
 import Cart from './pages/account/Cart.js';
 
-import Create from './pages/adminPages/Create.js';
+import ProductCreate from './pages/adminPages/Create.js';
 import Update from './pages/adminPages/Update.js';
 
 import Display from './pages/product/Display.js';
@@ -36,7 +36,7 @@ root.render(
           <Route path='login' element={<Login />} />
           <Route path='createaccount' element={<CreateAccount />} />
           <Route path='admin'>
-            <Route path='login' element={<AdminLogin />} />
+            <Route path='create' element={<ProductCreate />} />
           </Route>
           <Route path='*' element={<NoPage />} />
     </Routes>

@@ -19,21 +19,28 @@ function Nav() {
   const auth = Cookies.get('sid');
 
   const [account, setAccount] = useState(null);
+  const [role, setRole] = useState('User');
   const [loggedin, setLoggedin] = useState(false);
   const [cart, setCart] = useState(0);
 
-  //Get Cart
+  //Check if logged in
   useEffect(() => {
     auth ? setLoggedin(true) : setLoggedin(false);
-    let cartCheck = Cookies.get('cart');
-
-    if (cartCheck == undefined) {
-      Cookies.set('cart', JSON.stringify( [] ));
-    } else {
-      let num = totalItems(JSON.parse(cartCheck));
-      setCart(num);
-    }
   }, []);
+
+  //Get Cart
+  useEffect(() => {
+    const interval = setInterval(() => {
+      let cartCheck = Cookies.get('cart');
+
+      if (cartCheck == undefined) {
+        Cookies.set('cart', JSON.stringify( [] ));
+      } else {
+        let num = totalItems(JSON.parse(cartCheck));
+        setCart(num);
+      }
+    }, 500);
+  });
 
 
   //is Account Logged in?
@@ -43,6 +50,11 @@ function Nav() {
       let json = await response.json();
 
       if (json != []) setAccount(json);
+
+      response = await fetch('/Accounts/getrole');
+      json = await response.json();
+      
+      if (json != []) setRole(json);
     }
 
     getAccount();
@@ -52,8 +64,7 @@ function Nav() {
     <>
       <nav className='topnav'>
         <div className='navLink'><Link to="/">Products</Link></div>
-        <div className='navLink'><Link to="/create">On Sale</Link></div>
-        <div className='navLink'><Link to="/create">Find Store</Link></div>
+        <div className='navLink'><Link to="/admin/create">Admin</Link></div>
 
         <div className='navLink' style={{float: "right"}}><Link to="/Cart">Cart <i className="fa fa-shopping-cart" /> <p className='cartText'>{cart}</p></Link></div>
         {!loggedin && <div className='navLink' style={{float: "right"}}><Link to="/login">Sign In</Link></div>}

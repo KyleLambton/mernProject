@@ -1,0 +1,43 @@
+table {
+  border: 1px solid;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.cartImage {
+  width: 150px;
+  height: 50px;
+  object-fit: contain;
+  float: left;
+}
+
+.tableDesc {
+  width: 65%;
+  height: 50px;
+}
+
+.descDiv {
+  display: inline;
+}
+
+.cartTitle {
+  text-align: left;
+  margin-left: 40%;
+}
+
+.qty, .price {
+  text-align: center;
+}
+
+.right {
+  width: 80%;
+  text-align: right;
+  border-right: none;
+}

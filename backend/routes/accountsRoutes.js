@@ -98,8 +98,6 @@ router.get('/getrole', async (req, res) => {
 
     let role = account[0].role;
 
-    console.log(role);
-
     res.send({ role: role });
   } catch {
     res.status(500).send('Error with getting Role');

@@ -1,0 +1,25 @@
+//Create
+
+POST http://localhost:4000/Orders/createOrder
+Content-Type: application/json
+
+{
+  "account": "64333a1110115c6679948467",
+  "date": "Dec-01-01",
+  "address": "123 Some Address",
+  "country": "Canada",
+  "province": "Ontario",
+  "city": "Some Town",
+  "postal": "N9R1K4",
+  "paymentType": "Mastercard",
+  "accountNo": "1234123412349977",
+  "products": [["63b7bf872265c23c985c0cf2", 2, 200]]
+}
+
+###
+//Get oders by account ID
+GET http://localhost:4000/Orders/account/64333a1110115c6679948467
+
+###
+//Get order by order ID
+GET http://localhost:4000/Orders/order/6433395ee28adb345d29f7e1

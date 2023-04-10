@@ -11,13 +11,16 @@ import Login from './pages/account/Login.js';
 import CreateAccount from './pages/account/CreateAccount.js';
 import MyAccount from './pages/account/MyAccount.js';
 import LogOut from './pages/account/Logout.js';
-import Cart from './pages/account/Cart.js';
 
 import ProductCreate from './pages/adminPages/Create.js';
 import Update from './pages/adminPages/Update.js';
 
 import Display from './pages/product/Display.js';
 import ViewProduct from './pages/product/ViewProduct.js';
+
+import Cart from './pages/checkout/Cart.js';
+import Checkout from './pages/checkout/Checkout.js';
+
 import NoPage from './pages/NoPage.js';
 
 //AdminPages
@@ -38,6 +41,7 @@ root.render(
           <Route path='admin'>
             <Route path='create' element={<ProductCreate />} />
           </Route>
+          <Route path='checkout' element={<Checkout />} />
           <Route path='*' element={<NoPage />} />
     </Routes>
   </BrowserRouter>

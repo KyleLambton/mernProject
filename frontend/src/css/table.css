@@ -41,3 +41,9 @@ td, th {
   text-align: right;
   border-right: none;
 }
+
+.button1 {background-color: #4CAF50;} /* Green */
+
+button:hover {
+  opacity: 0.7;
+}

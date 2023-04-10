@@ -1,3 +1,9 @@
+.account {
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .medLoader {
   display: block;
   margin: auto;
@@ -16,4 +22,8 @@
 .accountInfo {
   width: 44%;
   float: right;
+}
+
+.ordersDiv {
+  clear: both;
 }

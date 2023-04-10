@@ -152,10 +152,11 @@ router.get('/getAccount', async (req, res) => {
       address: x.address,
       city: x.city,
       country: x.country,
+      province: "Ontario",
+      postal: "N9L4G6",
       role: x.role
     }
-
-    console.log(view);
+    console.log(view)
     res.json(view);
   } else {
     res.status(404).send();

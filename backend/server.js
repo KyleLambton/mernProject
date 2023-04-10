@@ -11,6 +11,7 @@ const session = require('express-session');
 
 const productRouter = require('./routes/routes.js');
 const accountRouter = require('./routes/accountsRoutes.js');
+const orderRouter = require('./routes/orderRoutes.js');
 
 const minutes = 60000;
 
@@ -34,6 +35,7 @@ app.use(session({
 }));
 app.use('/Products', productRouter);
 app.use('/Accounts', accountRouter);
+app.use('/Orders', orderRouter);
 
 //Connect
 mongoose.connect(process.env.DATABASE_URL, () =>{

@@ -9,6 +9,7 @@ import "../../css/myAccount.css";
 function MyAccount() {
 
   const [account, setAccount] = useState(null);
+  const [orders, setOrders] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(()=> {
@@ -19,8 +20,15 @@ function MyAccount() {
       if (json != []) setAccount(json);
       setLoaded(true);
     }
+    const getOrders = async () => {
+      let x = await fetch('/Orders/account/' + account._id);
+      let json = await x.json();
+
+      if (json != []) setOrders(json);
+    }
 
     getAccount();
+    getOrders();
   }, []);
 
   //JSX
@@ -43,6 +51,14 @@ function MyAccount() {
             <p>City: {account.city}</p>
             <p>Country: {account.country}</p>
           </div>
+        </div>
+        <div className="ordersDiv">
+          <h3>Orders</h3>
+          {orders.map((x) => (
+            <div className="order" key={x._id}>
+              <p>Order ID: {x._id} Date: {x.date}</p>
+            </div>
+          ))}
         </div>
       </>) : (<img src={loader} className="medLoader"/>)}
     </>
